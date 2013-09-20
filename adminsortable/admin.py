@@ -152,7 +152,7 @@ class SortableAdmin(SortableAdminBase, ModelAdmin):
             verbose_name_plural = opts.verbose_name_plural
 
         context = {
-            'title': u'Drag and drop {0} to change display order'.format(
+            'title': 'Drag and drop {0} to change display order'.format(
                 capfirst(verbose_name_plural)),
             'opts': opts,
             'app_label': opts.app_label,
@@ -253,7 +253,7 @@ class SortableInlineBase(SortableAdminBase, InlineModelAdmin):
         super(SortableInlineBase, self).__init__(*args, **kwargs)
 
         if not issubclass(self.model, Sortable):
-            raise Warning(u'Models that are specified in SortableTabluarInline'
+            raise Warning('Models that are specified in SortableTabluarInline'
                 ' and SortableStackedInline must inherit from Sortable')
 
     def queryset(self, request):

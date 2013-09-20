@@ -53,7 +53,7 @@ class Sortable(models.Model):
                 sortable_foreign_keys.append(field)
         if len(sortable_foreign_keys) > 1:
             raise MultipleSortableForeignKeyException(
-                u'%s may only have one SortableForeignKey' % self)
+                '%s may only have one SortableForeignKey' % self)
 
     def save(self, *args, **kwargs):
         if not self.id:
