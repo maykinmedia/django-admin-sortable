@@ -8,7 +8,7 @@
     {% url 'admin:jsi18n' as jsi18nurl %}
 
     {% if has_sortable_tabular_inlines or has_sortable_stacked_inlines %}
-        <script type="text/javascript" src="{% static 'adminsortable/js/jquery-ui.django-admin.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'adminsortable/js/jquery-ui-django-admin.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'adminsortable/js/jquery.django-csrf.js' %}"></script>
     {% endif %}
 
@@ -26,4 +26,8 @@
     {% if has_sortable_tabular_inlines or has_sortable_stacked_inlines %}
         <link rel="stylesheet" type="text/css" href="{% static 'adminsortable/css/admin.sortable.inline.css' %}" />
     {% endif %}
+{% endblock %}
+
+{% block after_related_objects %}{{ block.super }}
+<input type="hidden" id="localized_save_before_reorder_message" value="{% trans 'There are unsaved changes on this page. Please save your changes before reordering.' %}"/>
 {% endblock %}

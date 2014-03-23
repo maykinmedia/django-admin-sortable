@@ -83,7 +83,7 @@ class GenericNote(SimpleModel, Sortable):
         pass
 
     def __unicode__(self):
-        return u'{0} : {1}'.format(self.title, self.content_object)
+        return u'{}: {}'.format(self.title, self.content_object)
 
 
 # An model registered as an inline that has a custom queryset
@@ -95,3 +95,24 @@ class Component(SimpleModel, Sortable):
 
     def __unicode__(self):
         return self.title
+
+
+class Person(Sortable):
+    class Meta(Sortable.Meta):
+        verbose_name_plural = 'People'
+
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    is_board_member = models.BooleanField('Board Member', default=False)
+
+    # Sorting Filters allow you to set up sub-sets of objects that need
+    # to have independent sorting. They are listed in order, from left
+    # to right in the sorting change list. You can use any standard
+    # Django ORM filter method.
+    sorting_filters = (
+        ('Board Members', {'is_board_member': True}),
+        ('Non-Board Members', {'is_board_member': False}),
+    )
+
+    def __unicode__(self):
+        return '{} {}'.format(self.first_name, self.last_name)
